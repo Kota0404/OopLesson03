@@ -7,6 +7,18 @@ using System.Threading.Tasks;
 namespace Chapter4 {
     class Program {
         static void Main(string[] args) {
+            string code = "12345";
+
+            var message = GetMessage(code) ?? DefaultMessage();
+            Console.WriteLine(message);
+
+        }
+        private static object DefaultMessage() {
+            return "DefaultMessage";
+        }
+
+        private static object GetMessage(string code) {
+            return 123;
         }
     }
 }
