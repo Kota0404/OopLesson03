@@ -25,26 +25,43 @@ namespace Chapter4 {
         }*/
             #endregion
             #region null条件式
-            Console.WriteLine(GetProduct());
-        }
-        private static string GetProduct() {
-            Sale sale = new Sale {
-                ShopName = "pet store",
-                Amount = 100000,
-                Product = "food"
-            };
-            sale = null;
-            return sale?.Product;
-            
-        }
-        #endregion
+            /* Console.WriteLine(GetProduct());
+         }
+         private static string GetProduct() {
+             Sale sale = new Sale {
+                 ShopName = "pet store",
+                 Product = "food"
+             };
+             return sale?.Product;
 
-        class Sale {
-            //店舗名
-            public string ShopName { get; set; }
-            //売上高
-            public int Amount { get; set; }
-            public string Product { get; set; }
+         }*/
+            #endregion
+            #region
+            /* class Sale {
+                 //店舗名
+                 public string ShopName { get; set; }
+                 //売上高
+                 public int Amount { get; set; } = 1000000;
+                 public string Product { get; set; }
+             }*/
+            #endregion
+            //4.2.1
+            var numCollecttion = new YearMonth[5];
+           
+            for(int i =0; i<5; i++) {
+                Console.WriteLine("年と月を入力してください");
+                Console.WriteLine("年：");
+                int year = int.Parse( Console.ReadLine());
+                Console.WriteLine("月:");
+                int month = int.Parse(Console.ReadLine());
+                YearMonth yearmonth = new YearMonth(year,month);
+                numCollecttion[i] = yearmonth;
+            }
+            //4.2.2
+            foreach (var key in numCollecttion) {
+                Console.WriteLine($"{key.Year}年{key.Month}月");
+            }
+
         }
     }
 }
