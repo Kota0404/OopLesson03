@@ -14,11 +14,14 @@ namespace Chapter4 {
             Month = month;
         }
         //4.1.2
+        
         public bool Is21Century {
-            get{
+            
+            get {
                 return 2001 <= Year&& Year <= 2100;
             }
         }
+        
         //4.1.3
         public YearMonth AddOneMonth() {
             /*if (yearmonth.Month != 12) {
@@ -34,7 +37,6 @@ namespace Chapter4 {
         }
         //4.1.4
         public override string ToString() {
-            
             return $"{Year}年{Month}月";
         }
         
