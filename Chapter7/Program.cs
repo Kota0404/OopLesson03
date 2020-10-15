@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chapter7 {
     class Program {
+      static  Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>() { };
         static void Main(string[] args) {
             #region ディクショナリー
             /*  var employeeDict = new Dictionary<int, Employee>() {
@@ -57,38 +58,89 @@ namespace Chapter7 {
             var s = dict[md];
             Console.WriteLine(s);*/
             #endregion
-            var lines = File.ReadAllLines("sample.txt");
-            var we = new WordsExtractor(lines);
+            #region ディクショナリー登録、表示
+            //Console.WriteLine("**********************");
+            //Console.WriteLine("* 辞書登録プログラム *");
+            //Console.WriteLine("**********************");
+            //bool roop = true;
+            //while (roop) {
+            //    Console.WriteLine("1．登録　2．内容を表示 3.終了");
+            //    int hantei = int.Parse(Console.ReadLine());
+            //    Console.WriteLine($"<{hantei}");
+            //    switch (hantei) {
+            //        case 1:
+            //            AddD();
+            //            break;
+            //        case 2:
+            //            saidD();
+            //            break;
+            //        case 3:
+            //            roop = false;
+            //            break;
+            //    }
 
-            foreach (var item in we.Extract()) {
-                Console.WriteLine(item);
-            }
-            DuplicateKeySample();
-
+            //} 
+            #endregion
         }
-     static  public void DuplicateKeySample() {
-            // ディクショナリの初期化
-            var dict = new Dictionary<string, List<string>>() {
-               { "PC", new List<string> { "パーソナル コンピュータ", "プログラム カウンタ", } },
-               { "CD", new List<string> { "コンパクト ディスク", "キャッシュ ディスペンサー", } },
-            };
+        #region  ディクショナリ－に追加、初期化、列挙
+        /*  var lines = File.ReadAllLines("sample.txt");
+          var we = new WordsExtractor(lines);
 
-            // ディクショナリに追加
-            var key = "EC";
-            var value = "電子商取引";
-            if (dict.ContainsKey(key)) {
-                dict[key].Add(value);
-            } else {
-                dict[key] = new List<string> { value };
-            }
+          foreach (var item in we.Extract()) {
+              Console.WriteLine(item);
+          }
+          DuplicateKeySample();
 
-            // ディクショナリの内容を列挙
-            foreach (var item in dict) {
-                foreach (var term in item.Value) {
-                    Console.WriteLine("{0} : {1}", item.Key, term);
-                }
-            }
-        }
+      }
+   static  public void DuplicateKeySample() {
+          // ディクショナリの初期化
+          var dict = new Dictionary<string, List<string>>() {
+             { "PC", new List<string> { "パーソナル コンピュータ", "プログラム カウンタ", } },
+             { "CD", new List<string> { "コンパクト ディスク", "キャッシュ ディスペンサー", } },
+          };
+
+          // ディクショナリに追加
+          var key = "EC";
+          var value = "電子商取引";
+          if (dict.ContainsKey(key)) {
+              dict[key].Add(value);
+          } else {
+              dict[key] = new List<string> { value };
+          }
+
+          // ディクショナリの内容を列挙
+          foreach (var item in dict) {
+              foreach (var term in item.Value) {
+                  Console.WriteLine("{0} : {1}", item.Key, term);
+              }
+          }
+      }*/
+        #endregion
+
+        #region ディクショナリー　登録　表示メソッド
+        //登録メソッド
+        // static public  void AddD() {
+        //     Console.Write("KEYを入力：");
+        //     string key = Console.ReadLine();
+        //     Console.Write("VALUEを入力：");
+        //     string value = Console.ReadLine();
+        //     if (dict.ContainsKey(key)) {
+        //         dict[key].Add(value);
+        //     } else {
+        //         dict[key] = new List<string> { value };
+        //         Console.WriteLine("登録しました");
+        //     }
+        // }
+        //表示メソッド
+        //static private void saidD() {
+        //     foreach (var item in dict) {
+        //         foreach (var item2 in item.Value) {
+        //             Console.WriteLine($"{item.Key} : {item2}");
+        //         }
+        //     }
+        // }
+        #endregion
+
 
     }
 }
