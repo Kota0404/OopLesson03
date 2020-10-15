@@ -127,7 +127,20 @@ namespace Chapter6 {
    new Book { Title = "フレーズで覚えるC#入門", Price = 5300, Pages = 604 },
    new Book { Title = "私でも分かったASP.NET MVC", Price = 3200, Pages = 453 },
    new Book { Title = "楽しいC#プログラミング教室", Price = 2540, Pages = 348 },
-};
+            
+            };
+            //全ての書籍から[C#]の文字がいくつあるかカウントする
+            int count = 0;
+
+            foreach (var book in books.Where(b=> b.Title.Contains("c#"))) {
+                for(int i =0; i< book.Title.Length-1; i++) {
+                    if((book.Title[i] == 'C')&&(book.Title[i+1] == '#')){
+                        count++;
+                    }
+                }
+            }
+            Console.WriteLine($"文字列「C#]の個数は{count}です。");
+
             //6-2-1
             Console.WriteLine("----6-2-1----");
             books.Where(s => s.Title == "ワンダフル・C#ライフ").ToList().ForEach(b => Console.WriteLine($"価格は{b.Price}ページ数は{b.Pages}"));
@@ -145,8 +158,9 @@ namespace Chapter6 {
             //6-2-4
             Console.WriteLine("----6-2-4----");
             var bookprice = books.FirstOrDefault(b => b.Price >= 4000);
-            Console.WriteLine(bookprice.Title);
-
+            if (bookprice != null) {
+                Console.WriteLine(bookprice.Title);
+            }
             //6-2-5
             Console.WriteLine("----6-2-5----");
             var bookpage = books.Where(b => b.Price < 4000).Max(b => b.Pages);
