@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Chapter7 {
     class Program {
-      static  Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>() { };
+        //static  Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>() { };
+        static Dictionary<char, int> dict = new Dictionary<char, int>() { };
         static void Main(string[] args) {
             #region ディクショナリー
             /*  var employeeDict = new Dictionary<int, Employee>() {
@@ -81,6 +82,22 @@ namespace Chapter7 {
 
             //} 
             #endregion
+            Console.WriteLine("----7-1----");
+            string code = "Cozy Lummox gives smart squid who asks for job pen";
+            foreach (var item in code.ToUpper()) {
+                if ('A' <= item && item <= 'Z') {
+                    if (dict.ContainsKey(item)) {
+                        int value = dict[item] + 1;
+                        dict[item] = value;
+                    } else {
+                        dict.Add(item, 1);
+                    }
+                }
+            }
+           
+            foreach (var item in dict) {
+                Console.WriteLine($"{item.Key} : {item.Value}");
+            }
         }
         #region  ディクショナリ－に追加、初期化、列挙
         /*  var lines = File.ReadAllLines("sample.txt");
@@ -141,6 +158,6 @@ namespace Chapter7 {
         // }
         #endregion
 
-
+        
     }
 }

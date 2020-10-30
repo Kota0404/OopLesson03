@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6A3E310-9512-4C81-8319-73733288861B}</ProjectGuid>
+    <ProjectGuid>{3093DD74-C550-4EF4-88EC-3BB119443200}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Chapter7</RootNamespace>
     <AssemblyName>Chapter7</AssemblyName>
@@ -43,12 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="岡村\Abbreviations.cs" />
-    <Compile Include="岡村\Employee.cs" />
-    <Compile Include="岡村\MonthDay.cs" />
-    <Compile Include="岡村\Program.cs" />
-    <Compile Include="岡村\Properties\AssemblyInfo.cs" />
-    <Compile Include="岡村\WordsExtractor.cs" />
+    <Compile Include="Abbreviations.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="MonthDay.cs" />
     <Compile Include="Program.cs" />
@@ -57,30 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="岡村\App.config" />
-    <None Include="岡村\bin\Debug\Chapter7.exe.config" />
-    <None Include="岡村\obj\Debug\Chapter7.csproj.CoreCompileInputs.cache" />
-    <None Include="岡村\obj\Debug\Chapter7.csprojAssemblyReference.cache" />
-    <None Include="岡村\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="岡村\Abbreviations.txt" />
-    <Content Include="岡村\bin\Debug\Abbreviations.txt" />
-    <Content Include="岡村\bin\Debug\Chapter7.exe" />
-    <Content Include="岡村\bin\Debug\Chapter7.pdb" />
-    <Content Include="岡村\bin\Debug\sample.txt" />
-    <Content Include="岡村\Chapter7.csproj" />
-    <Content Include="岡村\obj\Debug\Chapter7.csproj.FileListAbsolute.txt" />
-    <Content Include="岡村\obj\Debug\Chapter7.exe" />
-    <Content Include="岡村\obj\Debug\Chapter7.pdb" />
-    <Content Include="岡村\sample.txt" />
+    <Content Include="Abbreviations.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sample.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="岡村\bin\Release\" />
-    <Folder Include="岡村\obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
