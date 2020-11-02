@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SendMailApp"
         mc:Ignorable="d"
-        Title="メール送信アプリ" Height="450" Width="800">
-    <Grid Margin="10">
+        Title="メール送信アプリ" Height="400" Width="600">
+    <Grid Margin="5" Background="AliceBlue">
     <Grid.RowDefinitions>
         <RowDefinition Height="1*"/>
         <RowDefinition Height="1*"/>
@@ -16,22 +16,22 @@
         <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="10*"/>
-        <ColumnDefinition Width="90*"/>
+        <ColumnDefinition Width="1*"/>
+        <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Text="件名 ：" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Text="To ：" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Text="CC ：" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Top" Text="Bcc ：" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" Text="本文 ：" HorizontalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="6" />
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="6" />
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="6" />
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="6" />
-        <TextBox Grid.Column="1" Grid.Row="4" Margin="6" />
-        <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="OK" Content="OK" Width="100" Margin="5"/>
-            <Button x:Name="Cancel" Content="Cancel" Width="100" Margin="5"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="件名 ：" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Text="To ：" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+        <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Text="CC ：" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+        <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" Text="Bcc ：" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+        <TextBlock Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" Text="本文 ：" HorizontalAlignment="Center" FontSize="16" Margin="4"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="6" x:Name="tbTitle"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="6" x:Name="tbTo" />
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="6" x:Name="tbCC"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="6" x:Name="tbBcc"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="6" x:Name="tbhonbun"/>
+        <StackPanel Grid.Column="2" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button x:Name="Cancel" Content="キャンセル" Width="100" Margin="5" FontSize="16"/>
+            <Button x:Name="sousin" Content="送信" Width="100" Margin="5" FontSize="16"/>
         </StackPanel>
     </Grid>
 </Window>
