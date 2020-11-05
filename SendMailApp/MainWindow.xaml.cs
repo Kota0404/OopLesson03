@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -39,19 +40,30 @@ namespace SendMailApp {
         //メールの送信処理
         private void  sousin_Click(object sender, RoutedEventArgs e) {
             try { 
-            MailMessage msg = new MailMessage("ojsinfosys01@gmail.com",tbTo.Text);
-
-            msg.Subject = tbTitle.Text;//件名
+            MailMessage msg = new MailMessage("ojsinfosys01 @gmail.com", tbTo.Text);
+                
+                msg.Subject = tbTitle.Text;//件名
             msg.Body = tbhonbun.Text;//本文
+                if (tbCC.Text != "") {
+                    string[] msgs = tbCC.Text.Split(',');
+                    foreach (var item in msgs) {
+                        msg.CC.Add(item);
+                    }
+                }
+                    if (tbBcc.Text != "") {
+                        string[] msgs = tbBcc.Text.Split(',');
+                        foreach (var item in msgs) {
+                            msg.Bcc.Add(item);
+                        }
+                    }
 
            
             sc.Host = "smtp.gmail.com";//smtpサーバーの設定
             sc.Port = 587;
             sc.EnableSsl = true;
-            sc.Credentials = new NetworkCredential("ojsinfosys01@gmail.com","ojsInfosys2020");
-
-
-            //sc.Send(msg); //送信
+            sc.Credentials = new NetworkCredential("ojsinfosys01 @gmail.com", "ojsInfosys2020");
+                
+                //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
