@@ -20,5 +20,33 @@ namespace SendMailApp {
         public ConfigWindow() {
             InitializeComponent();
         }
+
+        private void btDefaultclic(object sender, RoutedEventArgs e) {
+            Config config = (Config.GetInstance()).getConfig();
+            //Config defaultData = config.getConfig();
+            tbSmtp.Text = config.Smtp;
+            tbUserName.Text = config.MailAddress;
+            tbSender.Text = tbPort.Text = config.Port.ToString();
+            tbPassWord.Password = config.PassWord;
+            cbSsl.IsChecked = config.Ssl;
+        }
+        //適用更新
+        private void btApplyCl(object sender, RoutedEventArgs e) {
+            Config config = (Config.GetInstance());
+            config.UpdateStatus(tbSmtp.Text, 
+                tbUserName.Text,
+                tbPassWord.Password,
+                int.Parse(tbPort.Text), 
+                cbSsl);
+        }
+
+        private void ConfigWindow_Loaded(object sender, RoutedEventArgs e) {
+            Config config = Config.GetInstance();
+            tbSmtp.Text = config.Smtp;
+            tbUserName.Text = config.MailAddress;
+            tbSender.Text = tbPort.Text = config.Port.ToString();
+            tbPassWord.Password = config.PassWord;
+            cbSsl.IsChecked = config.Ssl;
+        }
     }
 }
