@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SendMailApp {
     public class Config {
@@ -57,6 +59,22 @@ namespace SendMailApp {
            this.Port = port;
            this.Ssl = ssl;
             return true;
+        }
+        //シリアル化
+        public void Serialise() {
+            using (var writer = XmlWriter.Create("config.xml")) {
+                var serializer = new XmlSerializer(instance.GetType());
+                serializer.Serialize(writer, instance);
+            }
+
+        }
+        //逆シリアル化
+        public void DeSerialise() {
+            using (var reader = XmlReader.Create("config.xml")) {
+                var serializer = new XmlSerializer(typeof(Config));
+                instance = serializer.Deserialize(reader) as Config;
+
+            }
         }
     }
 }
