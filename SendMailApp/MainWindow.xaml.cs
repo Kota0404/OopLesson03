@@ -61,7 +61,7 @@ namespace SendMailApp {
             sc.Host = config.Smtp;//smtpサーバーの設定
             sc.Port = config.Port;
             sc.EnableSsl = config.Ssl;
-            sc.Credentials = new NetworkCredential(config.MailAddress, "ojsInfosys2020");
+            sc.Credentials = new NetworkCredential(config.MailAddress, config.PassWord);
                 
                 //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);

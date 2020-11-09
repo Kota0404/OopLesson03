@@ -29,8 +29,8 @@ namespace SendMailApp {
         //初期設定用
         public void DefaultSet() {
             Smtp = "smtp.gmail.com";
-            MailAddress = "ojsinfosys01 @gmail.com";
-            PassWord = "ojsinfosys01 @gmail.com";
+            MailAddress = "ojsinfosys01@gmail.com";
+            PassWord = "ojsInfosys2020";
             Port = 587;
             Ssl = true;
         }
@@ -39,8 +39,8 @@ namespace SendMailApp {
         public Config getConfig() {
             Config obj = new Config {
              Smtp = "smtp.gmail.com",
-            MailAddress = "ojsinfosys01 @gmail.com",
-            PassWord = "ojsinfosys01 @gmail.com",
+            MailAddress = "ojsinfosys01@gmail.com",
+            PassWord = "ojsInfosys2020",
             Port = 587,
             Ssl = true
         };
