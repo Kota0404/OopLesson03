@@ -21,7 +21,7 @@ namespace SendMailApp {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
-
+        Config config = Config.GetInstance();
         SmtpClient sc = new SmtpClient();
 
         public MainWindow() {
@@ -58,10 +58,10 @@ namespace SendMailApp {
                     }
 
            
-            sc.Host = "smtp.gmail.com";//smtpサーバーの設定
-            sc.Port = 587;
-            sc.EnableSsl = true;
-            sc.Credentials = new NetworkCredential("ojsinfosys01 @gmail.com", "ojsInfosys2020");
+            sc.Host = config.Smtp;//smtpサーバーの設定
+            sc.Port = config.Port;
+            sc.EnableSsl = config.Ssl;
+            sc.Credentials = new NetworkCredential(config.MailAddress, "ojsInfosys2020");
                 
                 //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);

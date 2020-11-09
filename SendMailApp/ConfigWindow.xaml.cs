@@ -25,28 +25,37 @@ namespace SendMailApp {
             Config config = (Config.GetInstance()).getConfig();
             //Config defaultData = config.getConfig();
             tbSmtp.Text = config.Smtp;
-            tbUserName.Text = config.MailAddress;
-            tbSender.Text = tbPort.Text = config.Port.ToString();
+            tbUserName.Text = tbSender.Text = config.MailAddress;
+            tbPort.Text = config.Port.ToString();
             tbPassWord.Password = config.PassWord;
             cbSsl.IsChecked = config.Ssl;
         }
         //適用更新
         private void btApplyCl(object sender, RoutedEventArgs e) {
-            Config config = (Config.GetInstance());
-            config.UpdateStatus(tbSmtp.Text, 
+           (Config.GetInstance()).UpdateStatus(
+               tbSmtp.Text, 
                 tbUserName.Text,
                 tbPassWord.Password,
                 int.Parse(tbPort.Text), 
-                cbSsl);
+                cbSsl.IsChecked ?? false);　//更新処理を呼びだす
         }
-
+        //ロード時に一度だけ呼び出される
         private void ConfigWindow_Loaded(object sender, RoutedEventArgs e) {
             Config config = Config.GetInstance();
             tbSmtp.Text = config.Smtp;
-            tbUserName.Text = config.MailAddress;
-            tbSender.Text = tbPort.Text = config.Port.ToString();
+            tbSender.Text = tbUserName.Text = config.MailAddress;
+             tbPort.Text = config.Port.ToString();
             tbPassWord.Password = config.PassWord;
             cbSsl.IsChecked = config.Ssl;
+        }
+        //OKボタン
+        private void btOkCl(object sender, RoutedEventArgs e) {
+            btApplyCl(sender,e);
+            this.Close();
+        }
+        //Cancelボタン
+        private void btCancelCl(object sender, RoutedEventArgs e) {
+            this.Close();
         }
     }
 }
