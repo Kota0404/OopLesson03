@@ -60,16 +60,12 @@ namespace SendMailApp {
             tbPort.Text == config.Port.ToString() &&
             tbPassWord.Password == config.PassWord) {
 
-                if(config == null) { 
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Close();
-                }
-                this.Close();
-            } else {
                
-                if (MessageBox.Show("変更が反映されていませんキャンセルしますか?", "注意", MessageBoxButton.OKCancel)== MessageBoxResult.OK) {
-                    this.Close();
-                }
+                this.Close();
+            } else { 
+                    if (MessageBox.Show("変更が反映されていませんキャンセルしますか?", "注意", MessageBoxButton.OKCancel) == MessageBoxResult.OK) {
+                        this.Close();
+                    }
             }
         }
         //更新
