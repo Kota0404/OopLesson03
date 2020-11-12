@@ -53,8 +53,24 @@ namespace SendMailApp {
         }
         //Cancelボタン
         private void btCancelCl(object sender, RoutedEventArgs e) {
+            Config config = Config.GetInstance();
+            if (tbSmtp.Text == config.Smtp &&
+             tbUserName.Text == config.MailAddress &&
+             tbSender.Text == config.MailAddress &&
+            tbPort.Text == config.Port.ToString() &&
+            tbPassWord.Password == config.PassWord) {
 
-            this.Close();
+                if(config == null) { 
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Close();
+                }
+                this.Close();
+            } else {
+               
+                if (MessageBox.Show("変更が反映されていませんキャンセルしますか?", "注意", MessageBoxButton.OKCancel)== MessageBoxResult.OK) {
+                    this.Close();
+                }
+            }
         }
         //更新
         private bool kousin() {

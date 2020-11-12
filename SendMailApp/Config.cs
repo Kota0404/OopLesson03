@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 using System.Xml;
 using System.Xml.Serialization;
@@ -62,28 +63,23 @@ namespace SendMailApp {
             return true;
         }
         //シリアル化
-        public void Serialise() {
-            Config cf = Config.GetInstance();
-            try {
+        public void Serialise() {         
                 using (var writer = XmlWriter.Create("config.xml")) {
-                    var serializer = new XmlSerializer(cf.GetType());
-                    serializer.Serialize(writer, cf);
+                    var serializer = new XmlSerializer(instance.GetType());
+                    serializer.Serialize(writer, instance);
                 }
-            } catch (Exception) { }
+            
 
         }
         //逆シリアル化
         public void DeSerialise() {
-            try {
+            
                 using (var reader = XmlReader.Create("config.xml")) {
                     var serializer = new XmlSerializer(typeof(Config));
                     instance = serializer.Deserialize(reader) as Config;
                 }
 
-            } catch (System.IO.FileNotFoundException) {
-                ConfigWindow configWindow = new ConfigWindow();//設定画面のインスタンスを生成
-                configWindow.ShowDialog();//表示
-            }
+           
         }
     }
 }

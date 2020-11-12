@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -38,31 +39,31 @@ namespace SendMailApp {
         }
 
         //メールの送信処理
-        private void  sousin_Click(object sender, RoutedEventArgs e) {
-            try { 
-            MailMessage msg = new MailMessage("ojsinfosys01 @gmail.com", tbTo.Text);
-                
+        private void sousin_Click(object sender, RoutedEventArgs e) {
+            try {
+                MailMessage msg = new MailMessage("ojsinfosys01 @gmail.com", tbTo.Text);
+
                 msg.Subject = tbTitle.Text;//件名
-            msg.Body = tbhonbun.Text;//本文
+                msg.Body = tbhonbun.Text;//本文
                 if (tbCC.Text != "") {
                     string[] msgs = tbCC.Text.Split(',');
                     foreach (var item in msgs) {
                         msg.CC.Add(item);
                     }
                 }
-                    if (tbBcc.Text != "") {
-                        string[] msgs = tbBcc.Text.Split(',');
-                        foreach (var item in msgs) {
-                            msg.Bcc.Add(item);
-                        }
+                if (tbBcc.Text != "") {
+                    string[] msgs = tbBcc.Text.Split(',');
+                    foreach (var item in msgs) {
+                        msg.Bcc.Add(item);
                     }
+                }
 
-           
-            sc.Host = config.Smtp;//smtpサーバーの設定
-            sc.Port = config.Port;
-            sc.EnableSsl = config.Ssl;
-            sc.Credentials = new NetworkCredential(config.MailAddress, config.PassWord);
-                
+
+                sc.Host = config.Smtp;//smtpサーバーの設定
+                sc.Port = config.Port;
+                sc.EnableSsl = config.Ssl;
+                sc.Credentials = new NetworkCredential(config.MailAddress, config.PassWord);
+
                 //sc.Send(msg); //送信
                 sc.SendMailAsync(msg);
             } catch (Exception ex) {
@@ -74,18 +75,34 @@ namespace SendMailApp {
         private void Cancel_Click(object sender, RoutedEventArgs e) {
             sc.SendAsyncCancel();
         }
+
         //設定画面表示
         private void btConfig_Click(object sender, RoutedEventArgs e) {
+            ConfigWindowShow();
+        }
+        private static void ConfigWindowShow() {
             ConfigWindow configWindow = new ConfigWindow();//設定画面のインスタンスを生成
             configWindow.ShowDialog();//表示
         }
+
         //メインウィンドウがロードされるタイミングで呼び出される
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            Config.GetInstance().DeSerialise();
+            try {
+                Config.GetInstance().DeSerialise();
+            } catch (FileNotFoundException) {
+                ConfigWindowShow();//ファイルが存在しないので設定画面を先に表示
+
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e) {
-            Config.GetInstance().Serialise();
+            try {
+                Config.GetInstance().Serialise();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
