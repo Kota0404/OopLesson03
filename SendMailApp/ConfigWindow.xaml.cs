@@ -32,30 +32,46 @@ namespace SendMailApp {
         }
         //適用更新
         private void btApplyCl(object sender, RoutedEventArgs e) {
-           (Config.GetInstance()).UpdateStatus(
-               tbSmtp.Text, 
-                tbUserName.Text,
-                tbPassWord.Password,
-                int.Parse(tbPort.Text), 
-                cbSsl.IsChecked ?? false);　//更新処理を呼びだす
+            kousin();
         }
         //ロード時に一度だけ呼び出される
         private void ConfigWindow_Loaded(object sender, RoutedEventArgs e) {
             Config config = Config.GetInstance();
             tbSmtp.Text = config.Smtp;
             tbSender.Text = tbUserName.Text = config.MailAddress;
-             tbPort.Text = config.Port.ToString();
+            tbPort.Text = config.Port.ToString();
             tbPassWord.Password = config.PassWord;
             cbSsl.IsChecked = config.Ssl;
         }
         //OKボタン
         private void btOkCl(object sender, RoutedEventArgs e) {
-            btApplyCl(sender,e);
-            this.Close();
+            if (kousin()) {
+                this.Close();
+            }
+
+
         }
         //Cancelボタン
         private void btCancelCl(object sender, RoutedEventArgs e) {
+
             this.Close();
+        }
+        //更新
+        private bool kousin() {
+            if (tbSmtp.Text == "" ||
+                tbUserName.Text == "" || tbPassWord.Password == "" ||
+                tbPort.Text == "" || cbSsl.IsChecked == null) {
+                MessageBox.Show("未入力の項目があります", "エラー", MessageBoxButton.OK);
+                return false;
+            } else {
+                (Config.GetInstance()).UpdateStatus(
+                   tbSmtp.Text,
+                    tbUserName.Text,
+                    tbPassWord.Password,
+                    int.Parse(tbPort.Text),
+                    cbSsl.IsChecked ?? false);
+                return true;
+            }//更新処理を呼びだす
         }
     }
 }

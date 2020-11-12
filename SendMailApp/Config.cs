@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,17 +17,17 @@ namespace SendMailApp {
         public string PassWord { get; set; }//パスワード
         public int Port { get; set; }//ポート番号
         public bool Ssl { get; set; }//SSL設定
-       
+
         //インスタンスの取得
         public static Config GetInstance() {
-            if(instance == null) {
+            if (instance == null) {
                 instance = new Config();
             }
             return instance;
         }
 
         //コンストラクター(外部からnew禁止)
-        private Config() { 
+        private Config() {
         }
         //初期設定用
         public void DefaultSet() {
@@ -40,40 +41,48 @@ namespace SendMailApp {
         //初期値取得
         public Config getConfig() {
             Config obj = new Config {
-             Smtp = "smtp.gmail.com",
-            MailAddress = "ojsinfosys01@gmail.com",
-            PassWord = "ojsInfosys2020",
-            Port = 587,
-            Ssl = true
-        };
+                Smtp = "smtp.gmail.com",
+                MailAddress = "ojsinfosys01@gmail.com",
+                PassWord = "ojsInfosys2020",
+                Port = 587,
+                Ssl = true
+            };
             return obj;
         }
 
         //設定データ更新
         //public bool UpdateStatus(Config cf)
-        public bool UpdateStatus(string smtp,string mailAddress,string passWord, int port, bool ssl) {
-          
-           this.Smtp = smtp;
-           this.MailAddress = mailAddress;
-           this.PassWord = passWord;
-           this.Port = port;
-           this.Ssl = ssl;
+        public bool UpdateStatus(string smtp, string mailAddress, string passWord, int port, bool ssl) {
+
+            this.Smtp = smtp;
+            this.MailAddress = mailAddress;
+            this.PassWord = passWord;
+            this.Port = port;
+            this.Ssl = ssl;
             return true;
         }
         //シリアル化
         public void Serialise() {
-            using (var writer = XmlWriter.Create("config.xml")) {
-                var serializer = new XmlSerializer(instance.GetType());
-                serializer.Serialize(writer, instance);
-            }
+            Config cf = Config.GetInstance();
+            try {
+                using (var writer = XmlWriter.Create("config.xml")) {
+                    var serializer = new XmlSerializer(cf.GetType());
+                    serializer.Serialize(writer, cf);
+                }
+            } catch (Exception) { }
 
         }
         //逆シリアル化
         public void DeSerialise() {
-            using (var reader = XmlReader.Create("config.xml")) {
-                var serializer = new XmlSerializer(typeof(Config));
-                instance = serializer.Deserialize(reader) as Config;
+            try {
+                using (var reader = XmlReader.Create("config.xml")) {
+                    var serializer = new XmlSerializer(typeof(Config));
+                    instance = serializer.Deserialize(reader) as Config;
+                }
 
+            } catch (System.IO.FileNotFoundException) {
+                ConfigWindow configWindow = new ConfigWindow();//設定画面のインスタンスを生成
+                configWindow.ShowDialog();//表示
             }
         }
     }
