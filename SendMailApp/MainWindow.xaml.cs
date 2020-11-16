@@ -66,7 +66,13 @@ namespace SendMailApp {
                 sc.Credentials = new NetworkCredential(config.MailAddress, config.PassWord);
 
                 //sc.Send(msg); //送信
-                sc.SendMailAsync(msg);
+                if(msg.Subject == "" || msg.Body == "") {
+                    if((MessageBox.Show("件名もしくは本文が未入力です送信しますか？", "注意", 
+                        MessageBoxButton.OKCancel) == MessageBoxResult.OK))
+                        { 
+                            sc.SendMailAsync(msg);
+                    } else { MessageBox.Show("送信はキャンセルされました"); }
+                }
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
