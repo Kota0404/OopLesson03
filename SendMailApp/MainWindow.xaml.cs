@@ -23,7 +23,7 @@ namespace SendMailApp {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
-        Config config = Config.GetInstance();
+       
         SmtpClient sc = new SmtpClient();
 
         public MainWindow() {
@@ -58,7 +58,7 @@ namespace SendMailApp {
                     msg.Attachments.Add(attachment);
                 }
 
-
+                Config config = Config.GetInstance();
 
                 sc.Host = config.Smtp;//smtpサーバーの設定
                 sc.Port = config.Port;
