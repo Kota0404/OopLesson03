@@ -47,21 +47,17 @@ namespace SendMailApp {
                 msg.Subject = tbTitle.Text;//件名
                 msg.Body = tbhonbun.Text;//本文
                 if (tbCC.Text != "") {
-                    string[] msgs = tbCC.Text.Split(',');
-                    foreach (var item in msgs) {
-                        msg.CC.Add(item);
-                    }
+                    msg.CC.Add(tbCC.Text);
                 }
                 if (tbBcc.Text != "") {
-                    string[] msgs = tbBcc.Text.Split(',');
-                    foreach (var item in msgs) {
-                        msg.Bcc.Add(item);
-                    }
+                        msg.Bcc.Add(tbBcc.Text);
                 }
+
                 foreach (var item in addfile.Items) {
                     Attachment attachment = new Attachment(item.ToString());
                     msg.Attachments.Add(attachment);
                 }
+
 
 
                 sc.Host = config.Smtp;//smtpサーバーの設定
